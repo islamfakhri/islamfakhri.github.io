@@ -5,48 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إسلام فخري - مهندس كهرباء</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0061ff;
             --primary-light: #4d8cff;
             --secondary: #7928ca;
-            --glass-bg: rgba(255, 255, 255, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --glass-shadow: 0 8px 32px rgba(0, 97, 255, 0.25);
+            --dark-bg: #0a192f;
+            --card-bg: rgba(17, 34, 64, 0.7);
             --text-light: #ffffff;
-            --text-dark: #333333;
-            --blur-bg: blur(15px);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --text-secondary: #a8b2d1;
             --electric-blue: #00eeff;
             --electric-purple: #bd00ff;
-            --lang-bg: rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s ease;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #000428, #001c3d, #004e92);
+            background: var(--dark-bg);
             color: var(--text-light);
-            min-height: 100vh;
-            padding: 20px;
             line-height: 1.7;
             overflow-x: hidden;
             position: relative;
-            font-family: 'Tajawal', sans-serif;
         }
 
         body.en {
             direction: ltr;
-            font-family: 'Roboto', sans-serif;
         }
 
-        /* تأثيرات الخلفية المتحركة - رموز كهربائية هندسية */
+        /* تأثيرات الخلفية */
         .background-symbols {
             position: fixed;
             top: 0;
@@ -65,9 +57,7 @@
             opacity: 0;
             animation: floatSymbol 20s infinite linear;
             z-index: -1;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 238, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 238, 255, 0.3);
         }
 
         @keyframes floatSymbol {
@@ -88,26 +78,107 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 20px;
             position: relative;
             z-index: 10;
         }
 
+        /* شريط التنقل */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 238, 255, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--electric-purple), var(--electric-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 15px rgba(189, 0, 255, 0.5);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--electric-blue);
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--electric-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--electric-blue);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
         /* زر تبديل اللغة */
         .language-switcher {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
             display: flex;
             gap: 10px;
-            background: var(--lang-bg);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 30px;
             padding: 5px;
-            backdrop-filter: var(--blur-bg);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 238, 255, 0.2);
         }
 
         .lang-btn {
@@ -127,117 +198,19 @@
             color: #001c3d;
         }
 
-        /* تصميم الهيدر بأسلوب Liquid Glass */
-        header {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: var(--blur-bg);
-            border-radius: 24px;
-            padding: 25px 35px;
-            margin-bottom: 30px;
-            box-shadow: var(--glass-shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 97, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        header:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 97, 255, 0.35);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--electric-purple), var(--electric-blue));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 0 20px rgba(189, 0, 255, 0.5);
-        }
-
-        .logo-text h1 {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(to right, #ffffff, #a0d0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-            margin-bottom: 5px;
-        }
-
-        .logo-text p {
-            font-size: 18px;
-            opacity: 0.9;
-            color: var(--electric-blue);
-            font-weight: 500;
-        }
-
-        .contact-info {
-            text-align: left;
-        }
-
-        body:not(.en) .contact-info {
-            text-align: right;
-        }
-
-        .contact-info p {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-info i {
-            color: var(--electric-blue);
-            width: 24px;
-            text-align: center;
-        }
-
-        /* تصميم البطاقات بأسلوب الزجاج السائل */
-        .glass-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: var(--blur-bg);
-            border-radius: 24px;
+        /* بطاقات المحتوى */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: var(--glass-shadow);
             transition: var(--transition);
+            border: 1px solid rgba(0, 238, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .glass-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -247,28 +220,29 @@
             background: linear-gradient(to right, var(--electric-purple), var(--electric-blue));
         }
 
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 45px rgba(0, 97, 255, 0.3);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 97, 255, 0.2);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             margin-bottom: 25px;
+            border-bottom: 1px solid rgba(0, 238, 255, 0.1);
+            padding-bottom: 15px;
         }
 
         .card-icon {
             width: 50px;
             height: 50px;
             background: linear-gradient(135deg, var(--electric-purple), var(--electric-blue));
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-left: 15px;
             font-size: 22px;
-            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
         }
 
         body.en .card-icon {
@@ -278,77 +252,44 @@
 
         .card-title {
             font-size: 26px;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 10px;
+            font-weight: 600;
+            color: var(--electric-blue);
         }
-
-        .card-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--electric-purple), var(--electric-blue));
-            border-radius: 3px;
-        }
-
-        body.en .card-title::after {
-            right: auto;
-            left: 0;
-        }
-
-        /* تصميم محتوى البطاقات */
-      .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
 
         .info-item {
             display: flex;
             gap: 15px;
             margin-bottom: 25px;
             align-items: flex-start;
-            padding: 15px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .info-item:hover {
-            background: rgba(0, 97, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        body.en .info-item:hover {
-            transform: translateX(-5px);
         }
 
         .info-icon {
-            min-width: 45px;
-            height: 45px;
+            min-width: 40px;
+            height: 40px;
             background: rgba(0, 238, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             color: var(--electric-blue);
+            margin-top: 5px;
+        }
+
+        .info-content {
+            flex: 1;
         }
 
         .info-content h3 {
-            font-size: 19px;
-            margin-bottom: 8px;
-            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 10px;
             color: var(--electric-blue);
         }
 
         .info-content p {
-            opacity: 0.9;
-            font-size: 17px;
-            margin-bottom: 5px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.6;
         }
 
         .info-content ul {
@@ -362,8 +303,10 @@
         }
 
         .info-content li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         .info-content li::before {
@@ -378,20 +321,6 @@
         body.en .info-content li::before {
             margin-right: 0;
             margin-left: -1em;
-        }
-
-        .skill-bar {
-            background: rgba(255, 255, 255, 0.1);
-            height: 10px;
-            border-radius: 5px;
-            margin: 15px 0 25px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(to right, var(--electric-purple), var(--electric-blue));
-            border-radius: 5px;
         }
 
         .tags {
@@ -410,13 +339,32 @@
             border: 1px solid rgba(0, 238, 255, 0.3);
         }
 
-        /* تصميم الفوتر */
+        /* التذييل */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0 20px;
             font-size: 16px;
-            opacity: 0.8;
-            margin-top: 20px;
+            border-top: 1px solid rgba(0, 238, 255, 0.1);
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+
+        .contact-item i {
+            color: var(--electric-blue);
         }
 
         .social-links {
@@ -424,6 +372,7 @@
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
+            margin-bottom: 30px;
         }
 
         .social-links a {
@@ -463,127 +412,52 @@
             opacity: 1;
         }
 
-        /* تأثيرات الـ Liquid */
-        .liquid-effect {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(189, 0, 255, 0.3) 0%, rgba(0, 238, 255, 0.1) 70%);
-            filter: blur(60px);
-            z-index: -1;
-            animation: liquidMove 15s infinite alternate;
-        }
-
-        .liquid-effect:nth-child(1) {
-            top: 10%;
-            right: 10%;
-            width: 300px;
-            height: 300px;
-        }
-
-        .liquid-effect:nth-child(2) {
-            bottom: 10%;
-            left: 10%;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(0, 238, 255, 0.3) 0%, rgba(189, 0, 255, 0.1) 70%);
-        }
-
-        @keyframes liquidMove {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            50% {
-                transform: translate(40px, 60px) scale(1.2);
-            }
-            100% {
-                transform: translate(-20px, -30px) scale(0.9);
-            }
-        }
-
         /* التكيف مع الأجهزة المحمولة */
         @media (max-width: 768px) {
-            header {
+            .navbar {
                 flex-direction: column;
-                text-align: right;
                 gap: 20px;
             }
             
-            body.en header {
-                text-align: left;
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .logo {
-                justify-content: flex-start;
-                width: 100%;
-            }
-            
-            .contact-info {
-                width: 100%;
-                text-align: right;
-            }
-            
-            body.en .contact-info {
-                text-align: left;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
+            .card {
+                padding: 20px;
             }
             
             .card-header {
-                justify-content: flex-start;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
             }
             
-            .card-title::after {
-                right: 0;
-                transform: none;
+            .card-icon {
+                margin-left: 0;
             }
             
-            body.en .card-title::after {
-                left: 0;
-                right: auto;
+            body.en .card-icon {
+                margin-right: 0;
             }
-        }
-        
-        /* تصميم إضافي للرموز الكهربائية */
-        .electrical-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.05;
-            background-image: 
-                linear-gradient(rgba(0, 238, 255, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 238, 255, 0.2) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- تأثيرات السائل الخلفية -->
-    <div class="liquid-effect"></div>
-    <div class="liquid-effect"></div>
-    
-    <!-- شبكة خلفية كهربائية -->
-    <div class="electrical-grid"></div>
-    
-    <!-- زر تبديل اللغة -->
-    <div class="language-switcher">
-        <button class="lang-btn active" id="ar-btn">العربية</button>
-        <button class="lang-btn" id="en-btn">English</button>
-    </div>
-    
-    <!-- رموز الخلفية المتحركة - رموز كهربائية هندسية -->
+    <!-- رموز الخلفية المتحركة -->
     <div class="background-symbols" id="symbols-container"></div>
     
     <div class="container">
-        <!-- الهيدر -->
-        <header>
+        <!-- شريط التنقل -->
+        <nav class="navbar">
             <div class="logo">
                 <div class="logo-icon">
                     <i class="fas fa-bolt"></i>
@@ -591,250 +465,328 @@
                 <div class="logo-text">
                     <h1 class="ar-content">إسلام فخري</h1>
                     <h1 class="en-content" style="display:none">Eslam Fakhry</h1>
-                    <p class="ar-content">مهندس كهرباء متمرس في مشاريع البنية التحتية</p>
-                    <p class="en-content" style="display:none">Electrical Engineer - Infrastructure Specialist</p>
+                    <p class="ar-content">مهندس كهرباء</p>
+                    <p class="en-content" style="display:none">Electrical Engineer</p>
                 </div>
             </div>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> <span class="ar-content">islam.fakhri@proton.me</span><span class="en-content" style="display:none">islam.fakhri@proton.me</span></p>
-                <p><i class="fas fa-flag"></i> <span class="ar-content">الجنسية: مصري</span><span class="en-content" style="display:none">Nationality: Egyptian</span></p>
-                <p><i class="fas fa-shield-alt"></i> <span class="ar-content">الخدمة العسكرية: مكتملة</span><span class="en-content" style="display:none">Military Service: Completed</span></p>
+            
+            <div class="nav-links">
+                <a href="#" class="active ar-content">السيرة الذاتية</a>
+                <a href="#" class="active en-content" style="display:none">Resume</a>
             </div>
-        </header>
+            
+            <div class="language-switcher">
+                <button class="lang-btn active" id="ar-btn">العربية</button>
+                <button class="lang-btn" id="en-btn">English</button>
+            </div>
+        </nav>
         
-        <!-- الشبكة الرئيسية للمحتوى -->
-        <div class="content-grid">
-            <!-- بطاقة الملخص المهني -->
-            <div class="glass-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h2 class="card-title ar-content">الملخص المهني</h2>
-                    <h2 class="card-title en-content" style="display:none">Professional Summary</h2>
+        <!-- بطاقة المعلومات الشخصية -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-user"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <p class="ar-content">مهندس كهرباء بخبرة +3 سنوات في مجال المقاولات والمشاريع البنية التحتية. أتخصص في إدارة المواقع، وتصميم وتنفيذ أنظمة التوزيع الكهربائي، وإعداد دراسات الكميات، وتنسيق المشاريع مع الالتزام الصارم بالجودة والسلامة. أسعى لتوظيف مهاراتي وخبراتي للمساهمة في مشاريع مبتكرة وتحدية في مجال البناء.</p>
-                        <p class="en-content" style="display:none">Electrical Engineer with +3 years of experience in contracting and infrastructure projects. Specializes in site management, designing and implementing electrical distribution systems, conducting quantity surveying, and coordinating projects with a strong commitment to quality and safety. Seeking to leverage skills and expertise to contribute to innovative and challenging projects in the construction field.</p>
-                    </div>
+                <h2 class="card-title ar-content">المعلومات الشخصية</h2>
+                <h2 class="card-title en-content" style="display:none">Personal Information</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <div class="info-content">
+                    <p class="ar-content"><strong>الجنسية:</strong> مصري</p>
+                    <p class="en-content" style="display:none"><strong>Nationality:</strong> Egyptian</p>
                 </div>
             </div>
             
-            <!-- بطاقة التعليم -->
-            <div class="glass-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h2 class="card-title ar-content">التعليم</h2>
-                    <h2 class="card-title en-content" style="display:none">Education</h2>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3 class="ar-content">بكالوريوس هندسة كهربائية (قوى وآلات)</h3>
-                        <h3 class="en-content" style="display:none">Bachelor's degree in Electrical Engineering (Power and Machine)</h3>
-                        <p class="ar-content">كلية الهندسة، جامعة سوهاج</p>
-                        <p class="en-content" style="display:none">Faculty of Engineering, Suhag University</p>
-                        <p class="ar-content"><strong>سنة التخرج:</strong> 2022</p>
-                        <p class="en-content" style="display:none"><strong>Year of Graduation:</strong> 2022</p>
-                        <p class="ar-content"><strong>تقدير العام الأخير:</strong> ممتاز (90.17%)</p>
-                        <p class="en-content" style="display:none"><strong>Last Year Grade:</strong> Excellent (90.17%)</p>
-                        <p class="ar-content"><strong>المعدل التراكمي:</strong> جيد (73.74%)</p>
-                        <p class="en-content" style="display:none"><strong>Cumulative Grade:</strong> Good (73.74%)</p>
-                        <p class="ar-content"><strong>الترتيب:</strong> العاشر على الدفعة</p>
-                        <p class="en-content" style="display:none"><strong>Rank:</strong> 10th in the graduating class</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3 class="ar-content">مشروع التخرج</h3>
-                        <h3 class="en-content" style="display:none">Graduation Project</h3>
-                        <p class="ar-content">نظام التوزيع الكهربائي لمستشفى تخصصي</p>
-                        <p class="en-content" style="display:none">Electrical Distribution System for a Specialized Hospital</p>
-                        <p class="ar-content"><strong>التقدير:</strong> ممتاز</p>
-                        <p class="en-content" style="display:none"><strong>Grade:</strong> Excellent</p>
-                    </div>
+                <div class="info-content">
+                    <p class="ar-content"><strong>الخدمة العسكرية:</strong> مكتملة</p>
+                    <p class="en-content" style="display:none"><strong>Military Service:</strong> Completed</p>
                 </div>
             </div>
             
-            <!-- بطاقة الخبرة المهنية -->
-            <div class="glass-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h2 class="card-title ar-content">الخبرة المهنية</h2>
-                    <h2 class="card-title en-content" style="display:none">Professional Experience</h2>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-hard-hat"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3 class="ar-content">مهندس مشروع MEP</h3>
-                        <h3 class="en-content" style="display:none">MEP Project Engineer</h3>
-                        <p class="ar-content">مشروع خليج أم الثلاثي (المملكة العربية السعودية)</p>
-                        <p class="en-content" style="display:none">Amala Triple Bay Project (KSA)</p>
-                        <p class="ar-content"><strong>المالك:</strong> شركة البحر الأحمر</p>
-                        <p class="en-content" style="display:none"><strong>Owner:</strong> RedSea Company</p>
-                        <p class="ar-content"><strong>المقاول العام:</strong> حسن علام للمقاولات</p>
-                        <p class="en-content" style="display:none"><strong>General Contractor:</strong> Hassan Allam Construction</p>
-                        <p class="ar-content"><strong>المقاول من الباطن:</strong> نورو للمقاولات</p>
-                        <p class="en-content" style="display:none"><strong>Subcontractor:</strong> Nouroo Contracting</p>
-                        <p class="ar-content"><strong>المشروع:</strong> فندق مارينا الخليج الثلاثي 3 - أعمال البنية التحتية الثانوية</p>
-                        <p class="en-content" style="display:none"><strong>Project:</strong> Triple Bay Marina Hotel 3 – Secondary Infrastructure Works</p>
-                        <p class="ar-content"><strong>المدة:</strong> أكتوبر 2024 - حتى الآن</p>
-                        <p class="en-content" style="display:none"><strong>Duration:</strong> October 2024 – Present</p>
-                        <h4 class="ar-content">المسؤوليات:</h4>
-                        <h4 class="en-content" style="display:none">Responsibilities:</h4>
-                        <ul>
-                            <li class="ar-content">إدارة وتنفيذ أعمال توريد وتركيب البنية التحتية الكهربائية</li>
-                            <li class="en-content" style="display:none">Managed and implemented electrical infrastructure supply and installation works</li>
-                            <li class="ar-content">تنسيق تصميمات توزيع الأنظمة وضمان الامتثال لمعايير الجودة والسلامة</li>
-                            <li class="en-content" style="display:none">Coordinated system distribution designs and ensured compliance with quality and safety standards</li>
-                            <li class="ar-content">التعاون مع أصحاب المصلحة لدعم تنفيذ المشروع والإدارة الفعالة للموقع</li>
-                            <li class="en-content" style="display:none">Collaborated with various stakeholders to support project execution and effective site management</li>
-                        </ul>
-                    </div>
+                <div class="info-content">
+                    <p><strong>Email:</strong> islam.fakhri@proton.me</p>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3 class="ar-content">مهندس موقع كهرباء</h3>
-                        <h3 class="en-content" style="display:none">Electrical Site Engineer</h3>
-                        <p class="ar-content">مشروع معسكر الإقامة الجانب الغربي - تروجينا (نيوم)</p>
-                        <p class="en-content" style="display:none">West Side Accommodation Camp Project – Trojena (NEOM)</p>
-                        <p class="ar-content"><strong>المالك:</strong> العيوني</p>
-                        <p class="en-content" style="display:none"><strong>Owner:</strong> Al-AYUNI</p>
-                        <p class="ar-content"><strong>المقاول العام:</strong> سبيس ميكر السعودية</p>
-                        <p class="en-content" style="display:none"><strong>General Contractor:</strong> Space Maker KSA</p>
-                        <p class="ar-content"><strong>المقاول من الباطن:</strong> إيميج للمشاريع المتقدمة</p>
-                        <p class="en-content" style="display:none"><strong>Subcontractor:</strong> Image Advanced Project</p>
-                        <p class="ar-content"><strong>نطاق المشروع:</strong> تركيب وحدات تكييف منفصلة</p>
-                        <p class="en-content" style="display:none"><strong>Project Scope:</strong> Installation of split air conditioning units</p>
-                        <h4 class="ar-content">المسؤوليات:</h4>
-                        <h4 class="en-content" style="display:none">Responsibilities:</h4>
-                        <ul>
-                            <li class="ar-content">الإشراف على عملية تركيب وحدات التكييف المنفصلة في بيئة مشروع معقدة</li>
-                            <li class="en-content" style="display:none">Supervised the installation process of split AC units in a complex project environment</li>
-                            <li class="ar-content">التنسيق مع الفرق متعددة التخصصات لضمان التنفيذ السلس للأعمال الكهربائية</li>
-                            <li class="en-content" style="display:none">Coordinated with multidisciplinary teams to ensure smooth execution of electrical works</li>
-                            <li class="ar-content">مراقبة التقدم وإنفاذ الالتزام بمواصفات المشروع والجداول الزمنية</li>
-                            <li class="en-content" style="display:none">Monitored progress and enforced adherence to project specifications and timelines</li>
-                        </ul>
-                    </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة الملخص المهني -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h2 class="card-title ar-content">الملخص المهني</h2>
+                <h2 class="card-title en-content" style="display:none">Professional Summary</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-content">
+                    <p class="ar-content">مهندس كهرباء بخبرة +3 سنوات في مجال المقاولات والمشاريع البنية التحتية. أتخصص في إدارة المواقع، وتصميم وتنفيذ أنظمة التوزيع الكهربائي، وإعداد دراسات الكميات، وتنسيق المشاريع مع الالتزام الصارم بالجودة والسلامة. أسعى لتوظيف مهاراتي وخبراتي للمساهمة في مشاريع مبتكرة وتحدية في مجال البناء.</p>
+                    <p class="en-content" style="display:none">Electrical Engineer with +3 years of experience in contracting and infrastructure projects. Specializes in site management, designing and implementing electrical distribution systems, conducting quantity surveying, and coordinating projects with a strong commitment to quality and safety. Seeking to leverage skills and expertise to contribute to innovative and challenging projects in the construction field.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة التعليم -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2 class="card-title ar-content">التعليم</h2>
+                <h2 class="card-title en-content" style="display:none">Education</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="info-content">
+                    <h3 class="ar-content">بكالوريوس هندسة كهربائية (قوى وآلات)</h3>
+                    <h3 class="en-content" style="display:none">Bachelor's degree in Electrical Engineering (Power and Machine)</h3>
+                    <p class="ar-content">كلية الهندسة، جامعة سوهاج</p>
+                    <p class="en-content" style="display:none">Faculty of Engineering, Suhag University</p>
+                    <p class="ar-content"><strong>سنة التخرج:</strong> 2022</p>
+                    <p class="en-content" style="display:none"><strong>Year of Graduation:</strong> 2022</p>
+                    <p class="ar-content"><strong>تقدير العام الأخير:</strong> ممتاز (90.17%)</p>
+                    <p class="en-content" style="display:none"><strong>Last Year Grade:</strong> Excellent (90.17%)</p>
+                    <p class="ar-content"><strong>المعدل التراكمي:</strong> جيد (73.74%)</p>
+                    <p class="en-content" style="display:none"><strong>Cumulative Grade:</strong> Good (73.74%)</p>
+                    <p class="ar-content"><strong>الترتيب:</strong> العاشر على الدفعة</p>
+                    <p class="en-content" style="display:none"><strong>Rank:</strong> 10th in the graduating class</p>
                 </div>
             </div>
             
-            <!-- بطاقة المهارات -->
-            <div class="glass-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h2 class="card-title ar-content">المهارات التقنية</h2>
-                    <h2 class="card-title en-content" style="display:none">Technical Skills</h2>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-project-diagram"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3 class="ar-content">تصميم وتنفيذ الأنظمة الكهربائية</h3>
-                        <h3 class="en-content" style="display:none">Electrical System Design & Implementation</h3>
-                        <ul>
-                            <li class="ar-content">تطوير أنظمة التوزيع الكهربائي للمباني والبنى التحتية</li>
-                            <li class="en-content" style="display:none">Developing electrical distribution systems for buildings and infrastructures</li>
-                            <li class="ar-content">إعداد الرسومات الهندسية التفصيلية والمخططات</li>
-                            <li class="en-content" style="display:none">Preparing detailed engineering drawings and schematics</li>
-                        </ul>
-                    </div>
+                <div class="info-content">
+                    <h3 class="ar-content">مشروع التخرج</h3>
+                    <h3 class="en-content" style="display:none">Graduation Project</h3>
+                    <p class="ar-content">نظام التوزيع الكهربائي لمستشفى متخصص</p>
+                    <p class="en-content" style="display:none">Electrical Distribution System for a Specialized Hospital</p>
+                    <p class="ar-content"><strong>التقدير:</strong> ممتاز</p>
+                    <p class="en-content" style="display:none"><strong>Grade:</strong> Excellent</p>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3 class="ar-content">إدارة المشاريع</h3>
-                        <h3 class="en-content" style="display:none">Project Management</h3>
-                        <ul>
-                            <li class="ar-content">إدارة الموقع والتنسيق بين الفرق متعددة التخصصات</li>
-                            <li class="en-content" style="display:none">Site management and coordination among multidisciplinary teams</li>
-                            <li class="ar-content">إنفاذ معايير الجودة والسلامة في مواقع المشاريع</li>
-                            <li class="en-content" style="display:none">Enforcing quality and safety standards on project sites</li>
-                        </ul>
-                    </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة الخبرة المهنية -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-briefcase"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3 class="ar-content">دراسة الكميات وحصرها وتقدير التكاليف</h3>
-                        <h3 class="en-content" style="display:none">Quantity Surveying & Cost Estimation</h3>
-                        <ul>
-                            <li class="ar-content">إعداد تقديرات تكلفة المشروع من خلال دراسات الكميات التفصيلية</li>
-                            <li class="en-content" style="display:none">Preparing project cost estimates through detailed quantity surveys</li>
-                            <li class="ar-content">تتبع ميزانيات المشروع والتقارير المالية</li>
-                            <li class="en-content" style="display:none">Tracking project budgets and financial reports</li>
-                        </ul>
-                    </div>
+                <h2 class="card-title ar-content">الخبرة المهنية</h2>
+                <h2 class="card-title en-content" style="display:none">Professional Experience</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-hard-hat"></i>
                 </div>
-                
-                <div class="info-item">
-                    <div class="info-content">
-                        <h3 class="ar-content">البرمجيات</h3>
-                        <h3 class="en-content" style="display:none">Software Proficiency</h3>
-                        <div class="tags">
-                            <span class="tag">AutoCAD</span>
-                            <span class="tag">Dialux</span>
-                            <span class="tag">ETAP</span>
-                            <span class="tag">TIA Software</span>
-                            <span class="tag">Logics Pro</span>
-                            <span class="tag">ETS</span>
-                            <span class="tag">Microsoft Office</span>
-                            <span class="tag">Photoshop</span>
-                            <span class="tag">Cantasia Studio</span>
-                        </div>
+                <div class="info-content">
+                    <h3 class="ar-content">مهندس مشروع MEP</h3>
+                    <h3 class="en-content" style="display:none">MEP Project Engineer</h3>
+                    <p class="ar-content">مشروع خليج أم الثلاثي (المملكة العربية السعودية)</p>
+                    <p class="en-content" style="display:none">Amala Triple Bay Project (KSA)</p>
+                    <p class="ar-content"><strong>المالك:</strong> شركة البحر الأحمر</p>
+                    <p class="en-content" style="display:none"><strong>Owner:</strong> RedSea Company</p>
+                    <p class="ar-content"><strong>المقاول العام:</strong> حسن علام للمقاولات</p>
+                    <p class="en-content" style="display:none"><strong>General Contractor:</strong> Hassan Allam Construction</p>
+                    <p class="ar-content"><strong>المقاول من الباطن:</strong> نورو للمقاولات</p>
+                    <p class="en-content" style="display:none"><strong>Subcontractor:</strong> Nouroo Contracting</p>
+                    <p class="ar-content"><strong>المشروع:</strong> فندق مارينا الخليج الثلاثي 3 - أعمال البنية التحتية الثانوية</p>
+                    <p class="en-content" style="display:none"><strong>Project:</strong> Triple Bay Marina Hotel 3 – Secondary Infrastructure Works</p>
+                    <p class="ar-content"><strong>المدة:</strong> أكتوبر 2024 - حتى الآن</p>
+                    <p class="en-content" style="display:none"><strong>Duration:</strong> October 2024 – Present</p>
+                    <h4 class="ar-content">المسؤوليات:</h4>
+                    <h4 class="en-content" style="display:none">Responsibilities:</h4>
+                    <ul>
+                        <li class="ar-content">إدارة وتنفيذ أعمال توريد وتركيب البنية التحتية الكهربائية</li>
+                        <li class="en-content" style="display:none">Managed and implemented electrical infrastructure supply and installation works</li>
+                        <li class="ar-content">تنسيق تصميمات توزيع الأنظمة وضمان الامتثال لمعايير الجودة والسلامة</li>
+                        <li class="en-content" style="display:none">Coordinated system distribution designs and ensured compliance with quality and safety standards</li>
+                        <li class="ar-content">التعاون مع أصحاب المصلحة لدعم تنفيذ المشروع والإدارة الفعالة للموقع</li>
+                        <li class="en-content" style="display:none">Collaborated with various stakeholders to support project execution and effective site management</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="info-content">
+                    <h3 class="ar-content">مهندس موقع كهرباء</h3>
+                    <h3 class="en-content" style="display:none">Electrical Site Engineer</h3>
+                    <p class="ar-content">مشروع معسكر الإقامة الجانب الغربي - تروجينا (نيوم)</p>
+                    <p class="en-content" style="display:none">West Side Accommodation Camp Project – Trojena (NEOM)</p>
+                    <p class="ar-content"><strong>المالك:</strong> العيوني</p>
+                    <p class="en-content" style="display:none"><strong>Owner:</strong> Al-AYUNI</p>
+                    <p class="ar-content"><strong>المقاول العام:</strong> سبيس ميكر السعودية</p>
+                    <p class="en-content" style="display:none"><strong>General Contractor:</strong> Space Maker KSA</p>
+                    <p class="ar-content"><strong>المقاول من الباطن:</strong> إيميج للمشاريع المتقدمة</p>
+                    <p class="en-content" style="display:none"><strong>Subcontractor:</strong> Image Advanced Project</p>
+                    <p class="ar-content"><strong>نطاق المشروع:</strong> تركيب وحدات تكييف منفصلة</p>
+                    <p class="en-content" style="display:none"><strong>Project Scope:</strong> Installation of split air conditioning units</p>
+                    <h4 class="ar-content">المسؤوليات:</h4>
+                    <h4 class="en-content" style="display:none">Responsibilities:</h4>
+                    <ul>
+                        <li class="ar-content">الإشراف على عملية تركيب وحدات التكييف المنفصلة في بيئة مشروع معقدة</li>
+                        <li class="en-content" style="display:none">Supervised the installation process of split AC units in a complex project environment</li>
+                        <li class="ar-content">التنسيق مع الفرق متعددة التخصصات لضمان التنفيذ السلس للأعمال الكهربائية</li>
+                        <li class="en-content" style="display:none">Coordinated with multidisciplinary teams to ensure smooth execution of electrical works</li>
+                        <li class="ar-content">مراقبة التقدم وإنفاذ الالتزام بمواصفات المشروع والجداول الزمنية</li>
+                        <li class="en-content" style="display:none">Monitored progress and enforced adherence to project specifications and timelines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بطاقة المهارات -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2 class="card-title ar-content">المهارات التقنية</h2>
+                <h2 class="card-title en-content" style="display:none">Technical Skills</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-content">
+                    <h3 class="ar-content">تصميم وتنفيذ الأنظمة الكهربائية</h3>
+                    <h3 class="en-content" style="display:none">Electrical System Design & Implementation</h3>
+                    <ul>
+                        <li class="ar-content">تطوير أنظمة التوزيع الكهربائي للمباني والبنى التحتية</li>
+                        <li class="en-content" style="display:none">Developing electrical distribution systems for buildings and infrastructures</li>
+                        <li class="ar-content">إعداد الرسومات الهندسية التفصيلية والمخططات</li>
+                        <li class="en-content" style="display:none">Preparing detailed engineering drawings and schematics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-content">
+                    <h3 class="ar-content">إدارة المشاريع</h3>
+                    <h3 class="en-content" style="display:none">Project Management</h3>
+                    <ul>
+                        <li class="ar-content">إدارة الموقع والتنسيق بين الفرق متعددة التخصصات</li>
+                        <li class="en-content" style="display:none">Site management and coordination among multidisciplinary teams</li>
+                        <li class="ar-content">إنفاذ معايير الجودة والسلامة في مواقع المشاريع</li>
+                        <li class="en-content" style="display:none">Enforcing quality and safety standards on project sites</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-content">
+                    <h3 class="ar-content">البرمجيات</h3>
+                    <h3 class="en-content" style="display:none">Software Proficiency</h3>
+                    <div class="tags">
+                        <span class="tag">AutoCAD</span>
+                        <span class="tag">Dialux</span>
+                        <span class="tag">ETAP</span>
+                        <span class="tag">TIA Software</span>
+                        <span class="tag">Logics Pro</span>
+                        <span class="tag">ETS</span>
+                        <span class="tag">Microsoft Office</span>
+                        <span class="tag">Photoshop</span>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- الفوتر -->
+        <!-- بطاقة الشهادات -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h2 class="card-title ar-content">الشهادات</h2>
+                <h2 class="card-title en-content" style="display:none">Certifications</h2>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="info-content">
+                    <h3 class="ar-content">IBM شهادة مطور تطبيقات السحابية</h3>
+                    <h3 class="en-content" style="display:none">IBM Academic Certificate for Cloud Application Developer</h3>
+                    <p class="ar-content"><strong>تاريخ الإصدار:</strong> 21 أبريل 2019</p>
+                    <p class="en-content" style="display:none"><strong>Issued:</strong> 21 April 2019</p>
+                    <p class="ar-content"><strong>رقم الشهادة:</strong> 4326-1555-8499-1307</p>
+                    <p class="en-content" style="display:none"><strong>Certificate ID:</strong> 4326-1555-8499-1307</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="info-content">
+                    <h3 class="ar-content">IBM شهادة نمذجة التحليلات التنبؤية</h3>
+                    <h3 class="en-content" style="display:none">IBM Academic Certificate for Predictive Analytics Modeler</h3>
+                    <p class="ar-content"><strong>تاريخ الإصدار:</strong> 29 أبريل 2018</p>
+                    <p class="en-content" style="display:none"><strong>Issued:</strong> 29 April 2018</p>
+                    <p class="ar-content"><strong>رقم الشهادة:</strong> 7563-1 525-0029-8484</p>
+                    <p class="en-content" style="display:none"><strong>Certificate ID:</strong> 7563-1 525-0029-8484</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="info-content">
+                    <h3 class="ar-content">شهادة Google لأساسيات الذكاء الاصطناعي</h3>
+                    <h3 class="en-content" style="display:none">Google Certificate for AI Fundamentals</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- التذييل -->
         <footer>
-            <p class="ar-content">© 2025 سيرة إسلام فخري الذاتية. جميع الحقوق محفوظة.</p>
-            <p class="en-content" style="display:none">© 2024 Eslam Fakhry CV. All rights reserved.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>islam.fakhri@proton.me</span>
+                </div>
+            </div>
+            
             <div class="social-links">
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
             </div>
+            
+            <p class="ar-content">© 2024 إسلام فخري. جميع الحقوق محفوظة.</p>
+            <p class="en-content" style="display:none">© 2024 Eslam Fakhry. All rights reserved.</p>
         </footer>
     </div>
 
     <script>
-        // إنشاء الرموز الكهربائية الهندسية المتحركة في الخلفية
-        const symbols = [
-            '⏚', '⏛', '⏀', 
-            '⍐', '⍑', '⍒', '⚡', '🔌', '💡', 
-            '🔋', '📡', '🔦', '⏻', '⏼', '⏽', '⟁', '⏏', '⌁', '⍟',
-            '⍱', '⍲',
-            '℧', 'Ω', '⭘', '⭗', '△', '▽',
-          
-        ];
+        // إنشاء الرموز الكهربائية المتحركة في الخلفية
+        const symbols = ['⚡', '🔌', '💡', '🔋', '📡', '🔦'];
         const container = document.getElementById('symbols-container');
         
-        for (let i = 0; i < 70; i++) {
+        for (let i = 0; i < 50; i++) {
             const symbol = document.createElement('div');
             symbol.className = 'symbol';
             symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
@@ -846,52 +798,56 @@
             container.appendChild(symbol);
         }
         
-        // إضافة تفاعلية للبطاقات عند التمرير
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.glass-card');
+        // تبديل اللغة
+        const arBtn = document.getElementById('ar-btn');
+        const enBtn = document.getElementById('en-btn');
+        const arContents = document.querySelectorAll('.ar-content');
+        const enContents = document.querySelectorAll('.en-content');
+        const body = document.body;
+        
+        arBtn.addEventListener('click', function() {
+            arBtn.classList.add('active');
+            enBtn.classList.remove('active');
+            body.classList.remove('en');
+            body.dir = 'rtl';
             
-            // تأثيرات الظهور عند التمرير
-            const observer = new IntersectionObserver((entries) => {
+            arContents.forEach(el => el.style.display = 'block');
+            enContents.forEach(el => el.style.display = 'none');
+        });
+        
+        enBtn.addEventListener('click', function() {
+            enBtn.classList.add('active');
+            arBtn.classList.remove('active');
+            body.classList.add('en');
+            body.dir = 'ltr';
+            
+            arContents.forEach(el => el.style.display = 'none');
+            enContents.forEach(el => el.style.display = 'block');
+        });
+        
+        // تأثيرات الظهور عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            const options = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = 1;
                         entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 });
+            }, options);
             
             cards.forEach(card => {
                 card.style.opacity = 0;
                 card.style.transform = 'translateY(30px)';
                 card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 observer.observe(card);
-            });
-            
-            // تبديل اللغة
-            const arBtn = document.getElementById('ar-btn');
-            const enBtn = document.getElementById('en-btn');
-            const arContents = document.querySelectorAll('.ar-content');
-            const enContents = document.querySelectorAll('.en-content');
-            const body = document.body;
-            
-            arBtn.addEventListener('click', function() {
-                arBtn.classList.add('active');
-                enBtn.classList.remove('active');
-                body.classList.remove('en');
-                body.dir = 'rtl';
-                
-                arContents.forEach(el => el.style.display = 'block');
-                enContents.forEach(el => el.style.display = 'none');
-            });
-            
-            enBtn.addEventListener('click', function() {
-                enBtn.classList.add('active');
-                arBtn.classList.remove('active');
-                body.classList.add('en');
-                body.dir = 'ltr';
-                
-                arContents.forEach(el => el.style.display = 'none');
-                enContents.forEach(el => el.style.display = 'block');
             });
         });
     </script>
