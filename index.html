@@ -300,19 +300,10 @@
         }
 
         /* تصميم محتوى البطاقات */
-        .content-grid {
-    display: flex;
-    flex-direction: row;
+      .content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 20px;
-}
-
-.glass-card {
-    min-width: 350px;   /* يمكنك تعديل العرض حسب الحاجة */
-    max-width: 450px;
-    flex: 1 1 350px;
 }
 
         .info-item {
